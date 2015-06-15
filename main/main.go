@@ -14,7 +14,8 @@ func main() {
 	ip := flag.String("a", "", "Enter the IP address for the location you wish to quiery, leave blank for this External WAN IP.")
 	flag.Parse()
 
-	loc := gofreegeoip.Quiery(*server, *ip)
+	loc, status := gofreegeoip.Query(*server, *ip)
 
 	fmt.Printf("%+v", loc)
+	fmt.Println(status)
 }

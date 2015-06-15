@@ -36,12 +36,14 @@ type Location struct {
 	MetroCode   int     `json:"metro_code"`
 }
 
-// doQuiery  checks the specified server for the location of the specified ip address.
-func doQuiery(s string, i string) Location {
+// doQuery  checks the specified server for the location of the specified ip address.
+func doQuery(s string, i string) (Location, int) {
 
 	res, err := http.Get("https://" + s + "/json/" + i)
 	checkError(err)
 	defer res.Body.Close()
+
+	st := res.StatusCode
 
 	data, err := ioutil.ReadAll(res.Body)
 	checkError(err)
@@ -50,7 +52,7 @@ func doQuiery(s string, i string) Location {
 	err = json.Unmarshal(data, &loc)
 	checkError(err)
 
-	return loc
+	return loc, st
 }
 
 // checkError function to check error
@@ -60,8 +62,8 @@ func checkError(err error) {
 	}
 }
 
-// Quiery provides an external interface to gofreegeoip
-func Quiery(s string, i string) Location {
-	loc := doQuiery(s, i)
-	return loc
+// Query provides an external interface to gofreegeoip
+func Query(s string, i string) (Location, int) {
+	loc, st := doQuery(s, i)
+	return loc, st
 }

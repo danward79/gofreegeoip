@@ -9,4 +9,63 @@ freegeoip.net/{format}/{IP_or_hostname}
 
 You are limited to *10,000* calls per hour. If this is not enough you have to provide your own server! ;-) In which case see the [Github project here.](https://github.com/fiorix/freegeoip)
 
-TODO - Add 403 Support TODO - Quiery Timeout handling
+###Command Line interface
+
+```
+go run main.go -s freegeoip.net -a 8.8.8.8
+```
+
+######Command Line Switches
+
+-	-s server, Enter the IP address (IP:PORT) for the query server, leave blank for freegeoip.net
+
+-	-a ip, Enter the IP address for the location you wish to quiery, leave blank for this External WAN IP
+
+This will return two items a Location array and a status, which complies with HTTP status codes, defined in RFC 2616.
+
+```
+Location array
+    {
+      IP
+  	CountryCode
+  	CountryName
+  	RegionCode  
+  	RegionName  
+  	City
+  	ZipCode
+  	TimeZone
+  	Latitude
+  	Longitude
+  	MetroCode
+    }
+```
+
+```
+Status codes
+        StatusOK                   = 200
+        StatusForbidden            = 403 (Returned when you exceed your API allowance)
+        StatusNotFound             = 404
+```
+
+###Library call
+
+*Example of call from code.*
+
+```
+package main
+
+import (
+	"fmt"
+	"github.com/danward79/gofreegeoip"
+)
+
+func main() {
+
+  loc, status := gofreegeoip.Query("freegeoip.net", "8.8.8.8")
+
+	fmt.Printf("%+v", loc)
+	fmt.Println(status)
+}
+```
+
+TODO - Quiery Timeout handling
