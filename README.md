@@ -14,19 +14,21 @@ Assuming you have go installed and setup on your system.
 ```shell
 go get github.com/danward79/gofreegeoip
 ```
-
+######To run from source
+```shell
+cd $GOPATH/src/github.com/danward79/gofreegeoip
+go run gofreegeoip.go -s freegeoip.net -a 8.8.8.8
+```
 ######To compile as a genuine command line tool.
 ```shell
 cd $GOPATH/src/github.com/danward79/gofreegeoip
-
+go build gofreegeoip.go
 ```
-
 ###Command Line interface
-
 ```shell
-go run main.go -s freegeoip.net -a 8.8.8.8
+cd $GOPATH/src/github.com/danward79/gofreegeoip
+./gofreegeoip -s freegeoip.net -a 8.8.8.8
 ```
-
 ######Command Line Switches
 
 -	-s server, Enter the IP address (IP:PORT) for the query server, leave blank for freegeoip.net
