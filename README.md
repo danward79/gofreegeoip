@@ -11,7 +11,7 @@ You are limited to *10,000* calls per hour. If this is not enough you have to pr
 
 ###Command Line interface
 
-```bash
+```shell
 go run main.go -s freegeoip.net -a 8.8.8.8
 ```
 
