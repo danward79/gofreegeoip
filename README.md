@@ -9,6 +9,18 @@ freegeoip.net/{format}/{IP_or_hostname}
 
 You are limited to *10,000* calls per hour. If this is not enough you have to provide your own server! ;-) In which case see the [Github project here.](https://github.com/fiorix/freegeoip)
 
+###Install
+Assuming you have go installed and setup on your system.
+```shell
+go get github.com/danward79/gofreegeoip
+```
+
+######To compile as a genuine command line tool.
+```shell
+cd $GOPATH/src/github.com/danward79/gofreegeoip
+
+```
+
 ###Command Line interface
 
 ```shell
