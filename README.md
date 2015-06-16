@@ -51,7 +51,7 @@ Status codes
 
 *Example of call from code.*
 
-```
+```Go
 package main
 
 import (
