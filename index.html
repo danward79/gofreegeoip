@@ -43,9 +43,29 @@
 <p>You are limited to <em>10,000</em> calls per hour. If this is not enough you have to provide your own server! ;-) In which case see the <a href="https://github.com/fiorix/freegeoip">Github project here.</a></p>
 
 <h3>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h3>
+
+<p>Assuming you have go installed and setup on your system.</p>
+
+<div class="highlight highlight-shell"><pre>go get github.com/danward79/gofreegeoip</pre></div>
+
+<h6>
+<a id="to-run-from-source" class="anchor" href="#to-run-from-source" aria-hidden="true"><span class="octicon octicon-link"></span></a>To run from source</h6>
+
+<div class="highlight highlight-shell"><pre><span class="pl-c1">cd</span> <span class="pl-smi">$GOPATH</span>/src/github.com/danward79/gofreegeoip
+go run gofreegeoip.go -s freegeoip.net -a 8.8.8.8</pre></div>
+
+<h6>
+<a id="to-compile-as-a-genuine-command-line-tool" class="anchor" href="#to-compile-as-a-genuine-command-line-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>To compile as a genuine command line tool.</h6>
+
+<div class="highlight highlight-shell"><pre><span class="pl-c1">cd</span> <span class="pl-smi">$GOPATH</span>/src/github.com/danward79/gofreegeoip
+go build gofreegeoip.go</pre></div>
+
+<h3>
 <a id="command-line-interface" class="anchor" href="#command-line-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>Command Line interface</h3>
 
-<div class="highlight highlight-shell"><pre>go run main.go -s freegeoip.net -a 8.8.8.8</pre></div>
+<div class="highlight highlight-shell"><pre><span class="pl-c1">cd</span> <span class="pl-smi">$GOPATH</span>/src/github.com/danward79/gofreegeoip
+./gofreegeoip -s freegeoip.net -a 8.8.8.8</pre></div>
 
 <h6>
 <a id="command-line-switches" class="anchor" href="#command-line-switches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Command Line Switches</h6>
