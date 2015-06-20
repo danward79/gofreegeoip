@@ -5,7 +5,7 @@
 //
 // See http://www.freegeoip.net for details
 
-// Quieries have the following format, ip address is optional. If it is not included, the IP of the quiery location is used.
+// Queries have the following format, ip address is optional. If it is not included, the IP of the query location is used.
 // https://freegeoip.net/json/ip address
 
 // JSON Data has the following format
@@ -15,6 +15,7 @@ package gofreegeoip
 
 import (
 	"encoding/json"
+	"strings"
 
 	"io/ioutil"
 	"log"
@@ -38,21 +39,38 @@ type Location struct {
 
 // doQuery  checks the specified server for the location of the specified ip address.
 func doQuery(s string, i string) (Location, int) {
+	var loc Location
 
-	res, err := http.Get("https://" + s + "/json/" + i)
+	res, err := http.Get(assembleURL(s, i))
 	checkError(err)
 	defer res.Body.Close()
 
 	st := res.StatusCode
 
-	data, err := ioutil.ReadAll(res.Body)
-	checkError(err)
+	if st == http.StatusOK {
 
-	var loc Location
-	err = json.Unmarshal(data, &loc)
-	checkError(err)
+		data, err := ioutil.ReadAll(res.Body)
+		checkError(err)
+
+		err = json.Unmarshal(data, &loc)
+		checkError(err)
+
+	}
 
 	return loc, st
+}
+
+//assembleURL creates a correctly formatted URL
+func assembleURL(s string, i string) string {
+
+	if !strings.Contains(s, "http") {
+
+		s = "https://" + s
+
+	}
+
+	return s + "/json/" + i
+
 }
 
 // checkError function to check error

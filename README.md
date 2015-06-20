@@ -82,4 +82,4 @@ func main() {
 }
 ```
 
-TODO - Quiery Timeout handling
+TODO - Query Timeout handling. The ADSL internet provided where I live is terrible. So somekind of back-off is essential.
