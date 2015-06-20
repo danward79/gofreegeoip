@@ -42,7 +42,11 @@ func doQuery(s string, i string) (Location, int) {
 	var loc Location
 
 	res, err := http.Get(assembleURL(s, i))
-	checkError(err)
+	if err != nil {
+		log.Printf("Error http.Get %s", assembleURL(s, i))
+		log.Print(err)
+		return loc, 1
+	}
 	defer res.Body.Close()
 
 	st := res.StatusCode
@@ -50,10 +54,18 @@ func doQuery(s string, i string) (Location, int) {
 	if st == http.StatusOK {
 
 		data, err := ioutil.ReadAll(res.Body)
-		checkError(err)
+		if err != nil {
+			log.Print("Error ioutil.ReadAll")
+			log.Print(err)
+			return loc, 2
+		}
 
 		err = json.Unmarshal(data, &loc)
-		checkError(err)
+		if err != nil {
+			log.Print("Error json.Unmarshal")
+			log.Print(err)
+			return loc, 3
+		}
 
 	}
 
@@ -64,20 +76,10 @@ func doQuery(s string, i string) (Location, int) {
 func assembleURL(s string, i string) string {
 
 	if !strings.Contains(s, "http") {
-
 		s = "https://" + s
-
 	}
 
 	return s + "/json/" + i
-
-}
-
-// checkError function to check error
-func checkError(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 // Query provides an external interface to gofreegeoip
