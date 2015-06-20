@@ -34,6 +34,8 @@
           <h1>
 <a id="gofreegeoip" class="anchor" href="#gofreegeoip" aria-hidden="true"><span class="octicon octicon-link"></span></a>gofreegeoip</h1>
 
+<p><a href="https://travis-ci.org/danward79/gofreegeoip"><img src="https://travis-ci.org/danward79/gofreegeoip.svg?branch=master" alt="Build Status"></a></p>
+
 <p>Provides access to <a href="https://freegeoip.net/?q=8.8.8.8">Freegeoip.net</a> using GO</p>
 
 <p>Freegeoip provides an API which can give results via, XML, JSON and CSV. This app uses the JSON interface.</p>
@@ -43,9 +45,7 @@
 <p>You are limited to <em>10,000</em> calls per hour. If this is not enough you have to provide your own server! ;-) In which case see the <a href="https://github.com/fiorix/freegeoip">Github project here.</a></p>
 
 <h3>
-<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h3>
-
-<p>Assuming you have go installed and setup on your system.</p>
+<a id="install-assuming-you-have-go-installed-and-setup-on-your-system" class="anchor" href="#install-assuming-you-have-go-installed-and-setup-on-your-system" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Assuming you have go installed and setup on your system.</h3>
 
 <div class="highlight highlight-shell"><pre>go get github.com/danward79/gofreegeoip</pre></div>
 
@@ -99,6 +99,8 @@ go build gofreegeoip.go</pre></div>
         StatusNotFound             = 404
 </code></pre>
 
+<p>The library will also return a status of 1, 2 or 3 if another error has occurred. This is accompanied by a log message in stdout</p>
+
 <h3>
 <a id="library-call" class="anchor" href="#library-call" aria-hidden="true"><span class="octicon octicon-link"></span></a>Library call</h3>
 
@@ -113,13 +115,13 @@ go build gofreegeoip.go</pre></div>
 
 <span class="pl-k">func</span> <span class="pl-en">main</span>() {
 
-  <span class="pl-smi">loc</span>, <span class="pl-smi">status</span> <span class="pl-k">:=</span> gofreegeoip.<span class="pl-c1">Query</span>(<span class="pl-s"><span class="pl-pds">"</span>freegeoip.net<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>8.8.8.8<span class="pl-pds">"</span></span>)
+    <span class="pl-smi">loc</span>, <span class="pl-smi">status</span> <span class="pl-k">:=</span> gofreegeoip.<span class="pl-c1">Query</span>(<span class="pl-s"><span class="pl-pds">"</span>freegeoip.net<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>8.8.8.8<span class="pl-pds">"</span></span>)
 
     fmt.<span class="pl-c1">Printf</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-c1">%+v</span><span class="pl-pds">"</span></span>, loc)
     fmt.<span class="pl-c1">Println</span>(status)
 }</pre></div>
 
-<p>TODO - Quiery Timeout handling</p>
+<p>TODO - Query Timeout handling. The ADSL internet provided where I live is terrible. So somekind of back-off is essential.</p>
         </section>
 
         <footer>
